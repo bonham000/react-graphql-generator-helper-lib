@@ -3,9 +3,15 @@ import fs from "fs";
 import path from "path";
 import rimraf from "rimraf";
 
+/**
+ * File path constants.
+ */
 export const GQL_OUTPUT_FOLDER = "schema_documents";
 export const SCHEMA_FILE = "schema.graphql";
 
+/**
+ * Validate input program arguments.
+ */
 export const validateInputArguments = (
   schemaSource: string,
   configFile: string,
@@ -17,11 +23,16 @@ export const validateInputArguments = (
   }
 };
 
+/**
+ * Simple helper to validate a string as a URL or not.
+ */
 export const isValidURL = (input: string) => {
   const pattern = /^((http|https):\/\/)/;
   return pattern.test(input);
 };
-
+/**
+ * Fetch the schema file from a given URL.
+ */
 const fetchAndWriteSchemaFromUrl = async (
   url: string,
   destinationPath: string,
@@ -30,6 +41,9 @@ const fetchAndWriteSchemaFromUrl = async (
   await fs.writeFileSync(path.join(destinationPath, SCHEMA_FILE), result.data);
 };
 
+/**
+ * Fetch the schema file from a relative file path.
+ */
 const fetchAndWriteSchemaFromPath = async (
   sourceFilePath: string,
   destinationPath: string,
@@ -38,6 +52,9 @@ const fetchAndWriteSchemaFromPath = async (
   await fs.writeFileSync(path.join(destinationPath, SCHEMA_FILE), result);
 };
 
+/**
+ * Determine the method to fetch the GraphQL schema with.
+ */
 export const getSchemaProcessingMethod = (schemaSource: string) => {
   const IS_URL = isValidURL(schemaSource);
 
@@ -48,6 +65,9 @@ export const getSchemaProcessingMethod = (schemaSource: string) => {
   }
 };
 
+/**
+ * Remove temporary working files used while this program is running.
+ */
 export const removeTemporaryWorkingFiles = (destinationPath: string) => {
   rimraf.sync(GQL_OUTPUT_FOLDER);
   fs.copyFileSync(SCHEMA_FILE, path.join(destinationPath, SCHEMA_FILE));

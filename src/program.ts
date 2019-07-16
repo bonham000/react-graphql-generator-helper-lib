@@ -15,6 +15,9 @@ import {
   validateInputArguments,
 } from "./utils";
 
+/**
+ * Read program input arguments.
+ */
 program
   .option("--schemaSource [value]", "url or file path to your GraphQL schema")
   .option("--outputFile [value]", "destination path to write the output to")
@@ -22,13 +25,19 @@ program
   .parse(process.argv);
 
 const {
-  configFile,
   outputFile = "",
+  configFile = "./codegen.yml",
   schemaSource = process.env.SCHEMA_SOURCE,
 } = program;
 
+/**
+ * Validate input.
+ */
 validateInputArguments(schemaSource, configFile);
 
+/**
+ * Run the program.
+ */
 (async () => {
   const schemaFn = getSchemaProcessingMethod(schemaSource);
   await schemaFn(schemaSource, "");
