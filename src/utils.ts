@@ -37,8 +37,15 @@ const fetchAndWriteSchemaFromUrl = async (
   url: string,
   destinationPath: string,
 ) => {
-  const result = await axios.get(url);
-  await fs.writeFileSync(path.join(destinationPath, SCHEMA_FILE), result.data);
+  try {
+    const result = await axios.get(url);
+    await fs.writeFileSync(
+      path.join(destinationPath, SCHEMA_FILE),
+      result.data,
+    );
+  } catch (err) {
+    throw new Error(`Could not fetch schema from remote URL! Tried: ${url}`);
+  }
 };
 
 /**
