@@ -1,6 +1,6 @@
 {
   "name": "react-graphql-generator-helper-lib",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "A tool for generating React and TypeScript code from a GraphQL Schema",
   "repository": "https://github.com/bonham000/react-graphql-generator.git",
   "author": "Sean Smith <sean.smith.2009@gmail.com>",

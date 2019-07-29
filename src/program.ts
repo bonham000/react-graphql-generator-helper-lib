@@ -22,9 +22,14 @@ program
   .option("--schemaSource [value]", "url or file path to your GraphQL schema")
   .option("--outputFile [value]", "destination path to write the output to")
   .option("--configFile [value]", "file path you want to store the output")
+  .option(
+    "--copySchema [value]",
+    "boolean flag to copy the schema file into the output folder, default false",
+  )
   .parse(process.argv);
 
 const {
+  copySchema = false,
   outputFile = "",
   configFile = "./codegen.yml",
   schemaSource = process.env.SCHEMA_SOURCE,
@@ -48,5 +53,5 @@ validateInputArguments(schemaSource, configFile);
 
   await exec(`graphql-codegen --config ${configFile}`);
 
-  removeTemporaryWorkingFiles(outputFile);
+  removeTemporaryWorkingFiles(outputFile, copySchema);
 })();

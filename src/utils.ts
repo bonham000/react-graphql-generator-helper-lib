@@ -75,8 +75,14 @@ export const getSchemaProcessingMethod = (schemaSource: string) => {
 /**
  * Remove temporary working files used while this program is running.
  */
-export const removeTemporaryWorkingFiles = (destinationPath: string) => {
+export const removeTemporaryWorkingFiles = (
+  destinationPath: string,
+  copySchema: boolean,
+) => {
   rimraf.sync(GQL_OUTPUT_FOLDER);
-  fs.copyFileSync(SCHEMA_FILE, path.join(destinationPath, SCHEMA_FILE));
+  if (copySchema) {
+    fs.copyFileSync(SCHEMA_FILE, path.join(destinationPath, SCHEMA_FILE));
+  }
+
   fs.unlinkSync(SCHEMA_FILE);
 };
