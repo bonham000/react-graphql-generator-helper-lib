@@ -48,7 +48,7 @@ validateInputArguments(schemaSource, configFile);
   await schemaFn(schemaSource, "");
 
   await exec(
-    `gqlg --depthLimit 5 --schemaFilePath ./${SCHEMA_FILE} --destDirPath ${GQL_OUTPUT_FOLDER}`,
+    `gqlg --depthLimit 10 --schemaFilePath ./${SCHEMA_FILE} --destDirPath ${GQL_OUTPUT_FOLDER}`,
   );
 
   await exec(`graphql-codegen --config ${configFile}`);
