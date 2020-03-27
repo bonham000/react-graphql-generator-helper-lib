@@ -1,21 +1,13 @@
-# Example Codegen yml file
 overwrite: true
 schema: schema.graphql
-documents: schema_documents/**/*.gql
+documents: schema/**/*.gql
 generates:
-  graphql/introspection-result.json:
-    plugins:
-      - fragment-matcher
-  graphql/index.tsx:
+  src/graphql/types.ts:
     plugins:
       - typescript
       - typescript-operations
-      - typescript-react-apollo
     config:
+      avoidOptionals: true
       immutableTypes: true
-      declarationKind: interface
       typesPrefix: I
-      withHOC: true
-      withHooks: true
-      withComponent: true
-      withMutationFn: true
+      declarationKind: interface

@@ -1,6 +1,6 @@
 {
   "name": "react-graphql-generator-helper-lib",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "description": "A tool for generating React and TypeScript code from a GraphQL Schema",
   "repository": "https://github.com/bonham000/react-graphql-generator.git",
   "author": "Sean Smith <sean.smith.2009@gmail.com>",
@@ -16,7 +16,9 @@
     "prettier:fix": "prettier --write './src/**/*.{ts,tsx}'",
     "tslint": "tslint --project tsconfig.json -c tslint.json",
     "tslint:fix": "tslint --project tsconfig.json -c tslint.json --fix",
-    "test": "yarn prettier && yarn tslint && yarn tsc",
+    "lint": "yarn prettier && yarn tslint",
+    "format": "yarn prettier:fix && yarn tslint:fix",
+    "test": "yarn lint && yarn tsc",
     "build": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "codegen": "graphql-codegen --config codegen.yml",
     "gql:lib": "gqlg --schemaFilePath ./schema.graphql --destDirPath ./schema --depthLimit 5",
@@ -27,13 +29,13 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.4",
-    "@graphql-codegen/cli": "^1.4.0",
-    "@graphql-codegen/fragment-matcher": "^1.4.0",
-    "@graphql-codegen/introspection": "1.4.0",
-    "@graphql-codegen/typescript": "1.4.0",
-    "@graphql-codegen/typescript-operations": "1.4.0",
-    "@graphql-codegen/typescript-react-apollo": "1.4.0",
-    "@graphql-codegen/typescript-resolvers": "^1.4.0",
+    "@graphql-codegen/cli": "^1.13.1",
+    "@graphql-codegen/fragment-matcher": "^1.13.1",
+    "@graphql-codegen/introspection": "^1.13.1",
+    "@graphql-codegen/typescript": "^1.13.1",
+    "@graphql-codegen/typescript-operations": "^1.13.1",
+    "@graphql-codegen/typescript-react-apollo": "^1.13.1",
+    "@graphql-codegen/typescript-resolvers": "^1.13.1",
     "@types/graphql": "^14.2.2",
     "axios": "^0.19.0",
     "commander": "^2.20.0",
@@ -52,7 +54,6 @@
     "@types/rimraf": "^2.0.2",
     "prettier": "^1.18.2",
     "tslint": "^5.18.0",
-    "tslint-immutable": "^6.0.1",
     "typescript": "^3.3.3"
   }
 }
